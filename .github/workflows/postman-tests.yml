@@ -1,0 +1,28 @@
+name: Postman API Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Restful Booker collection
+        run: |
+          newman run postman/Restful_Booker.postman_collection.json \
+            -e postman/Restful_Booker.postman_environment.json \
+            --reporters cli
