@@ -90,8 +90,10 @@ Latest local Collection Runner execution during project setup:
 - **21 passed**
 - **0 failed**
 - **0 errors**
+- **12.811 s** total duration
+- **300 ms** average response time
 
-![Postman Runner summary](screenshots/runner-summary.png)
+Detailed run evidence: [`docs/runner-results.md`](docs/runner-results.md)
 
 ## How to run in Postman
 
@@ -129,15 +131,11 @@ restful-booker-api-testing/
 │   └── workflows/
 │       └── postman-tests.yml
 ├── docs/
+│   ├── runner-results.md
 │   └── test-scenarios.md
 ├── postman/
 │   ├── Restful_Booker.postman_collection.json
 │   └── Restful_Booker.postman_environment.json
-├── screenshots/
-│   ├── runner-summary.png
-│   ├── runner-create-update.png
-│   ├── runner-patch.png
-│   └── runner-delete.png
 ├── .gitignore
 └── README.md
 ```
