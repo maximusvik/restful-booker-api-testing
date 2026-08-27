@@ -82,7 +82,7 @@ The automated tests validate:
 - Successful deletion
 - `404 Not Found` after deleting the booking
 
-## Example run result
+## Test run evidence
 
 Latest local Collection Runner execution during project setup:
 
@@ -92,6 +92,24 @@ Latest local Collection Runner execution during project setup:
 - **0 errors**
 - **12.811 s** total duration
 - **300 ms** average response time
+
+### Runner summary
+
+![Postman Runner summary](screenshots/runner-summary.webp)
+
+### Create and full update
+
+![Create booking and PUT update results](screenshots/runner-create-update.webp)
+
+### Partial update verification
+
+![PATCH partial update results](screenshots/runner-patch.webp)
+
+### Delete verification
+
+The final GET intentionally returns **404 Not Found** after DELETE, and the assertion passes because the booking is expected to be gone.
+
+![DELETE and 404 verification](screenshots/runner-delete.webp)
 
 Detailed run evidence: [`docs/runner-results.md`](docs/runner-results.md)
 
@@ -136,6 +154,11 @@ restful-booker-api-testing/
 ├── postman/
 │   ├── Restful_Booker.postman_collection.json
 │   └── Restful_Booker.postman_environment.json
+├── screenshots/
+│   ├── runner-summary.webp
+│   ├── runner-create-update.webp
+│   ├── runner-patch.webp
+│   └── runner-delete.webp
 ├── .gitignore
 └── README.md
 ```
