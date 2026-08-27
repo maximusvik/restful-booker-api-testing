@@ -95,21 +95,21 @@ Latest local Collection Runner execution during project setup:
 
 ### Runner summary
 
-<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-summary.webp" alt="Postman Runner summary" width="900">
+<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-summary.jpg" alt="Postman Runner summary" width="900">
 
 ### Create and full update
 
-<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-create-update.webp" alt="Create booking and PUT update results" width="1000">
+<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-create-update.jpg" alt="Create booking and PUT update results" width="1000">
 
 ### Partial update verification
 
-<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-patch.webp" alt="PATCH partial update results" width="1000">
+<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-patch.jpg" alt="PATCH partial update results" width="1000">
 
 ### Delete verification
 
 The final GET intentionally returns **404 Not Found** after DELETE, and the assertion passes because the booking is expected to be gone.
 
-<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-delete.webp" alt="DELETE and 404 verification" width="1000">
+<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-delete.jpg" alt="DELETE and 404 verification" width="1000">
 
 Detailed run evidence: [`docs/runner-results.md`](docs/runner-results.md)
 
@@ -155,10 +155,10 @@ restful-booker-api-testing/
 │   ├── Restful_Booker.postman_collection.json
 │   └── Restful_Booker.postman_environment.json
 ├── screenshots/
-│   ├── runner-summary.webp
-│   ├── runner-create-update.webp
-│   ├── runner-patch.webp
-│   └── runner-delete.webp
+│   ├── runner-summary.jpg
+│   ├── runner-create-update.jpg
+│   ├── runner-patch.jpg
+│   └── runner-delete.jpg
 ├── .gitignore
 └── README.md
 ```
