@@ -95,21 +95,21 @@ Latest local Collection Runner execution during project setup:
 
 ### Runner summary
 
-![Postman Runner summary](screenshots/runner-summary.webp)
+<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-summary.webp" alt="Postman Runner summary" width="900">
 
 ### Create and full update
 
-![Create booking and PUT update results](screenshots/runner-create-update.webp)
+<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-create-update.webp" alt="Create booking and PUT update results" width="1000">
 
 ### Partial update verification
 
-![PATCH partial update results](screenshots/runner-patch.webp)
+<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-patch.webp" alt="PATCH partial update results" width="1000">
 
 ### Delete verification
 
 The final GET intentionally returns **404 Not Found** after DELETE, and the assertion passes because the booking is expected to be gone.
 
-![DELETE and 404 verification](screenshots/runner-delete.webp)
+<img src="https://raw.githubusercontent.com/maximusvik/restful-booker-api-testing/main/screenshots/runner-delete.webp" alt="DELETE and 404 verification" width="1000">
 
 Detailed run evidence: [`docs/runner-results.md`](docs/runner-results.md)
 
