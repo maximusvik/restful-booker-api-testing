@@ -1,0 +1,50 @@
+name: Install Runner screenshots
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-runner-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Decode valid JPG screenshots
+        run: |
+          for name in runner-summary runner-create-update runner-patch runner-delete; do
+            base64 -d "screenshots/.upload/${name}.b64" > "screenshots/${name}.jpg"
+            test "$(head -c 2 "screenshots/${name}.jpg" | xxd -p)" = "ffd8"
+          done
+
+      - name: Point README to JPG screenshots
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('README.md')
+          s = p.read_text()
+          for name in ['runner-summary','runner-create-update','runner-patch','runner-delete']:
+              s = s.replace(f'{name}.webp', f'{name}.jpg')
+              s = s.replace(f'{name}.svg', f'{name}.jpg')
+          p.write_text(s)
+          PY
+
+      - name: Clean temporary and broken files
+        run: |
+          git rm -f --ignore-unmatch screenshots/*.webp screenshots/*.svg screenshots/test.txt
+          git rm -rf --ignore-unmatch screenshots/.upload
+          git rm -f --ignore-unmatch tmp-ignore.txt tmp-ignore2.txt tmp-ignore3.txt tmp-ignore4.txt tmp-ignore5.txt tmp-test-svg.txt tmp-last-test.txt
+          git rm -f --ignore-unmatch .github/workflows/convert-screenshots.yml .github/workflows/install-runner-images.yml
+
+      - name: Commit final screenshots
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md screenshots/*.jpg
+          git commit -m 'Fix Postman Runner screenshots'
+          git push
