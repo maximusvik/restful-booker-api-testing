@@ -1,0 +1,50 @@
+name: Finalize Runner screenshots
+
+on:
+  push:
+    branches:
+      - fix-runner-screenshots-clean
+    paths:
+      - '.github/workflows/finalize-runner-screenshots.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Rebuild and verify screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat screenshots/.imgfix/summaryA screenshots/.imgfix/summaryB | tr -d '\r\n' | base64 -d > screenshots/runner-summary.jpg
+          cat screenshots/.imgfix/create.00 screenshots/.imgfix/create.01 screenshots/.imgfix/create.02 | tr -d '\r\n' | base64 -d > screenshots/runner-create-update.jpg
+          cat screenshots/.imgfix/patch.00 screenshots/.imgfix/patch.01 screenshots/.imgfix/patch.02 | tr -d '\r\n' | base64 -d > screenshots/runner-patch.jpg
+          cat screenshots/.imgfix/delete.00 screenshots/.imgfix/delete.01 | tr -d '\r\n' | base64 -d > screenshots/runner-delete.jpg
+
+          echo '36bacf8776858beeabe2ceef91f4e1256777f0427641bad46d3295c7ae95d756  screenshots/runner-summary.jpg' | sha256sum -c -
+          echo '54a33669d3ca3faf0e770229dec56d26e4543d69ebeedf44fc636000854b736c  screenshots/runner-create-update.jpg' | sha256sum -c -
+          echo '03e9872240322fd6c714b003b73acd980e965ac82d676b43149f64a7f9e8077f  screenshots/runner-patch.jpg' | sha256sum -c -
+          echo '534029f90736c2f7d9bd25c612d2da5312baeda82091243717132c5418790299  screenshots/runner-delete.jpg' | sha256sum -c -
+
+      - name: Commit clean screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          git rm -rf --ignore-unmatch screenshots/.imgfix || true
+          git rm -rf --ignore-unmatch screenshots/.fresh || true
+          git rm -rf --ignore-unmatch screenshots/.repair || true
+          git rm -f --ignore-unmatch .github/workflows/finalize-runner-screenshots.yml || true
+          git rm -f --ignore-unmatch .github/workflows/replace-runner-screenshots.yml || true
+
+          git add screenshots/runner-summary.jpg screenshots/runner-create-update.jpg screenshots/runner-patch.jpg screenshots/runner-delete.jpg
+          git commit -m 'Replace corrupted Runner screenshots'
+          git push
