@@ -1,5 +1,6 @@
 name: Finalize Runner screenshots
 
+# Retry after fixing the exact summary image chunk.
 on:
   push:
     branches:
